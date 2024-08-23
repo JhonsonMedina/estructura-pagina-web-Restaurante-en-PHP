@@ -1,0 +1,56 @@
+.navbar{
+    position:fixed;
+    min-width: 100%;;
+    color: black;
+}
+
+.nav-link:hover{
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    background: black;
+    color: white;
+}
+
+.imagen{
+    background-image: url('./images/img1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 535.5px;
+}
+
+.letras{
+    padding-top: 200px;
+    color: white;
+}
+
+.letras-1{
+    color: white;
+}
+
+.Sub-menu{
+    margin-top: 20px;
+}
+
+.img3{
+    width: 200px;
+    height: 140px;
+}
+
+.img2{
+    width: 200px;
+    height: 140px;
+}
+
+.img4{
+    width: 200px;
+    height: 140px;
+}
+
+.row{
+    margin-bottom: 20px;
+
+}
+
+.img5{
+    width: 260px;
+    height: 174px;
+}
