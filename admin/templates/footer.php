@@ -1,5 +1,6 @@
 
       
+      </section>
         <footer>
             <!-- place footer here -->
         </footer>

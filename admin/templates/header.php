@@ -1,3 +1,8 @@
+<?php
+ $url_base="http://localhost/restaurante/admin/"
+
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -27,16 +32,18 @@
                     >Administrador <span class="visually-hidden">(current)</span></a
                 >
 
-                <a class="nav-item nav-link" href="#Banners">Banners</a>
-                <a class="nav-item nav-link" href="#Colaboradores">Colaboradores</a>
-                <a class="nav-item nav-link" href="#Testimonios">Testimonios</a>
-                <a class="nav-item nav-link" href="#Menu">Menu</a>
-                <a class="nav-item nav-link" href="#Comentarios">Comentarios</a>
-                <a class="nav-item nav-link" href="#Usiarios">Usuarios</a>
-                <a class="nav-item nav-link" href="#Cerrar">Cerrar</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base; ?>banners/">Banners</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base; ?>Colaboradores/">Colaboradores</a>
+                <a class="nav-item nav-link" href="#<?php echo $url_base; ?>testimonios/">Testimonios</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base; ?>menu/">Menu</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base; ?>comentarios/">Comentarios</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base; ?>usuarios/">Usuarios</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base; ?>cerrar/">Cerrar</a>
 
             </div>
         </nav>
         
         
         </header>
+
+        <section class="container">
