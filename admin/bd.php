@@ -7,7 +7,7 @@ $contraseña="";
 try{
    
  $conexion = new PDO("mysql:host=$servidor;dbname=$baseDatos", $usuario, $contraseña);
-    echo "Conectado";
+    //echo "Conectado";
 } catch(exeption $error){
   echo $error->getMessage();
 }

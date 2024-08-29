@@ -1,3 +1,16 @@
+<?php
+
+include("admin/bd.php");
+
+$sentencia = $conexion->prepare("SELECT * FROM tbl_banners ORDER BY id DESC limit 1");
+$sentencia->execute();
+$lista_banners = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -37,7 +50,7 @@
       <div class="navbar-nav">
        
         <a class="nav-link" href="#inicio"><strong>Inicio</a></strong>
-        <a class="nav-link" href="#Menu"><strong>Menu</a></strong>
+        <a class="nav-link" href="#menu"><strong>Menu</a></strong>
         <a class="nav-link" href="#Chefs"><strong>Chefs</a></strong>
         <a class="nav-link" href="#Testimonios"><strong>Testimonio</a></strong>
         <a class="nav-link" href="#Contactos"><strong>Contactos</a></strong>
@@ -51,18 +64,31 @@
 <!--sub menu -->
 
 <div id="inicio"  class="container-expand-lg"> 
+ <div class="imagen text-center "> 
 
-    <div class="imagen text-center "> 
-<h1 class="letras">Bienvenidos</h1>
-<p class="letras-1">Restaurante del mejor sabor casero</p>
-<a href="#menu" class="btn btn-primary">Ver Menu</a>
-       </div>  
+<?php 
+
+foreach($lista_banners as $banners){
+
+?>
+
+
+<h1 class="letras"> <?php echo $banners['titulo']; ?></h1>
+<p class="letras-1"><?php echo $banners['descripcion']; ?></p>
+<a href="<?php echo $banners['link']; ?>" class="btn btn-primary">Ver Menu</a>
+      
+<?php   }    ?>
+
+
+
+
+ </div>  
 </div>
 
 
 
 
-<section id="Menu"  class="Sub-menu bg-dark">
+<section class="Sub-menu bg-dark">
 
 <div class="text-white text-center">
  <h1>Bienvenidos al Restaurant</h1>
@@ -165,7 +191,7 @@
 
 
 <!-- platos Recomendados-->
-<section class="container mt-4">
+<section id="menu"   class="container mt-4">
 
 <h2 class="text-center">Menu(nuestra recomendacion)</h2>
 <br/>
