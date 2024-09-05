@@ -41,7 +41,7 @@ $sentencia->bindParam(":linkinstagram", $linkinstagram);
 $sentencia->bindParam(":linklinkedin", $linklinkedin);
 
 $sentencia->execute();
-
+header("Location:index.php");
     
 }
 
@@ -63,7 +63,7 @@ $sentencia->execute();
         <label for="" class="form-label">Titulo</label>
         <input type="text"class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder=""
         />
-        <small id="helpId" class="form-text text-muted">Help text</small>
+        <small id="helpId" class="form-text text-muted"></small>
     </div>
     
    <div class="mb-3">

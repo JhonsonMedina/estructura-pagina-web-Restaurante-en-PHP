@@ -6,6 +6,10 @@ $sentencia = $conexion->prepare("SELECT * FROM tbl_banners ORDER BY id DESC limi
 $sentencia->execute();
 $lista_banners = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
+$sentencia = $conexion->prepare("SELECT * FROM tbl_colaboradores ORDER BY id DESC  limit 3");
+$sentencia->execute();
+$lista_colaboradores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
 
 ?>
 
@@ -66,11 +70,7 @@ $lista_banners = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 <div id="inicio"  class="container-expand-lg"> 
  <div class="imagen text-center "> 
 
-<?php 
-
-foreach($lista_banners as $banners){
-
-?>
+<?php foreach($lista_banners as $banners){ ?>
 
 
 <h1 class="letras"> <?php echo $banners['titulo']; ?></h1>
@@ -105,42 +105,30 @@ foreach($lista_banners as $banners){
  <!-- Chef que trabjan en el restaurante -->
 
 
-<div class="container text-center">
-  <div class="row">
+<div class="container text-center ">
+<div class="row colaborador">
 
-  <div class="col-md-4"> <img class="img3" src="images/colaboradores/img3.jpg" alt="img2"> 
+<?php foreach($lista_colaboradores as $colaborador){ ?>
+
+
+    <div class="col-md-4  ">
+ <img class="img3" src="images/colaboradores/<?php echo $colaborador['foto'];  ?> "/> 
   
-  <div>Chef 1</div>
+  <h5><?php echo $colaborador['titulo']; ?></h5>
+  <p><?php echo $colaborador['descripcion']; ?></p>
   <div>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <a href="<?php echo $colaborador['linkfacebook']; ?>"><i class="fab fa-facebook"></i></a>
+    <a href="<?php echo $colaborador['linkinstagram']; ?>"><i class="fab fa-instagram"></i></a>
+    <a href="<?php echo $colaborador['linklinkedin']; ?>"><i class="fab fa-linkedin"></i></a>
   </div>
   
-  </div>
-
-    <div class="col-md-4"><img  class="img2" src="images/colaboradores/img2.jpg" alt="img2"> 
-
-    <div>Chef 2</div>
-  <div>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
-  </div>
   
-  </div>
 
-
-    <div class="col-md-4"><img  class="img4" src="images/colaboradores/img4.webp" alt="img2"> 
-
-    <div>Chef 3</div>
-  <div>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
-  </div>
   
-  </div>
+      </div>
+ 
+
+  <?php   }    ?>
 
   </div>
 </div>

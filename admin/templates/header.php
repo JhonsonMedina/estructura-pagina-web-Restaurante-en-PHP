@@ -34,7 +34,7 @@
 
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>banners/">Banners</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>Colaboradores/">Colaboradores</a>
-                <a class="nav-item nav-link" href="#<?php echo $url_base; ?>testimonios/">Testimonios</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base; ?>testimonios/">Testimonios</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>menu/">Menu</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>comentarios/">Comentarios</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>usuarios/">Usuarios</a>
