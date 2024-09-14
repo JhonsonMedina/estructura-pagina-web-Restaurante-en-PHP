@@ -5,7 +5,7 @@
         <div
             class="h-100 p-5 border rounded-3"
         >
-            <h2>Bienveni@ al Administrador</h2>
+            <h2>Bienveni@ al Administrador <?php echo $_SESSION['usuario'];  ?> </h2>
             <p>
                Este espacio es para administrador de tu sitio web
             </p>

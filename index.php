@@ -10,6 +10,40 @@ $sentencia = $conexion->prepare("SELECT * FROM tbl_colaboradores ORDER BY id DES
 $sentencia->execute();
 $lista_colaboradores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
+$sentencia = $conexion->prepare("SELECT * FROM tbl_testimonios ORDER BY id DESC limit 2 ");
+$sentencia->execute();
+$lista_testimonios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+$sentencia = $conexion->prepare("SELECT * FROM tbl_menu ORDER BY id DESC limit 4 ");
+$sentencia->execute();
+$lista_menu = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+
+if($_POST){
+  //para impedir que el usuario envia otro tipo de informacio
+      $nombre=filter_var($_POST["nombre"], FILTER_SANITIZE_STRING);
+      $correo = filter_var($_POST["correo"], FILTER_SANITIZE_EMAIL);
+      $mensaje=filter_var($_POST["mensaje"],FILTER_SANITIZE_STRING);
+  
+      if($nombre &&  $correo && filter_var($correo, FILTER_VALIDATE_EMAIL) && $mensaje){
+  
+      $sql=  "INSERT INTO
+       tbl_comentarios (nombre, correo, mensaje)
+        VALUES (:nombre, :correo,:mensaje)";
+  
+      $sentencia=$conexion->prepare($sql);
+      $sentencia->bindParam(":nombre", $nombre,  PDO::PARAM_STR);
+      $sentencia->bindParam(":correo", $correo, PDO::PARAM_STR);
+      $sentencia->bindParam(":mensaje", $mensaje, PDO::PARAM_STR);
+      $sentencia->execute();
+      
+  
+  
+      }
+  
+  
+  
+  }
 
 ?>
 
@@ -104,14 +138,16 @@ $lista_colaboradores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
  <!-- Chef que trabjan en el restaurante -->
 
+<section>
+<div class="container text-center   ">
 
-<div class="container text-center ">
-<div class="row colaborador">
+
+<div class="row align-items-cente  ">
 
 <?php foreach($lista_colaboradores as $colaborador){ ?>
+    <div class="col-4 ">
 
-
-    <div class="col-md-4  ">
+   
  <img class="img3" src="images/colaboradores/<?php echo $colaborador['foto'];  ?> "/> 
   
   <h5><?php echo $colaborador['titulo']; ?></h5>
@@ -123,59 +159,48 @@ $lista_colaboradores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
   </div>
   
   
-
-  
       </div>
- 
 
-  <?php   }    ?>
-
+      <?php   }    ?>
   </div>
-</div>
-
-
-<!--Testimonio-->
-
-<section id="Testimonios" class="bg-light py-5">
-
-<div class="container">
-
-<h2 class="text-center mb-4"> Testimonios</h2>
-
-<div class="row">
-
-  <div class="col-md-6 d-flex">
-    <div class="card mb-4 w-100">
-      <div class="card-body">
-        <p class="card-text">Muy buena comida</p>
-      </div>
-       
-      <div class="card-footer">
-              Jhonson Medina
-      </div>
-    
-    </div>
-  </div>
-
-
-  <div class="col-md-6 d-flex">
-    <div class="card mb-4 w-100">
-      <div class="card-body">
-        <p class="card-text">Muy buena comida</p>
-      </div>
-       
-      <div class="card-footer">
-              Jhonson Medina
-      </div>
-    
-    </div>
-  </div>
-
-</div>
-
 </div>
 
 </section>
+
+<!--Testimonio-->
+
+<section  id="Testimonios" class="bg-ligth py-5">
+
+<div class="container">
+
+<h2 class="text-center mb-4">Testimonio</h2>
+<div class="row">
+
+<?php  foreach($lista_testimonios as $testimonio) {  ?>
+ 
+  <div class="col-md-6 d-flex">
+    <div class="card mb-4 w-100">
+        <div class="card-body">
+          <p class="card-text"><?php echo $testimonio["opinion"]; ?></p>
+        </div>
+        <div class="card-footer text-muted"> 
+       <?php echo $testimonio["nombre"]; ?>
+        </div>
+    </div>
+  </div>
+  
+    
+  <?php  } ?>
+
+  </div>
+
+  </div>
+
+</section>
+
+
+
+
 
 
 <!-- platos Recomendados-->
@@ -186,46 +211,20 @@ $lista_colaboradores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="row row-cols-1 row-cols-md-4 g-4">
 
+<?php foreach($lista_menu as $menu)  { ?>
 <div class="col d-flex">
   <div class="card">
-    <img src="images/comidas/28209.jpg" alt="tortillas" class="card-img-top">
+    <img src="images/menu/<?php echo $menu['foto']; ?>" alt="tortillas" class="card-img-top">
      <div class="card-body">
-      <h5 class="card-title"> pasticho</h5>
-      <p class="card-text"><strong>Precio: </strong>$4,00</p>
+      <h5 class="card-title"> <?php echo $menu['nombre']; ?></h5>
+      <p class="card-text"><?php echo $menu['ingredientes']; ?></p>
+      <p class="card-text"><?php echo $menu['precio']; ?></p>
     </div>
  </div>
 </div>
 
-<div class="col d-flex">
-  <div class="card">
-    <img src="images/comidas/images.jpeg" alt="tortillas" class="card-img-top">
-     <div class="card-body">
-      <h5 class="card-title"> pasticho</h5>
-      <p class="card-text"><strong>Precio: </strong>$4,00</p>
-    </div>
- </div>
-</div>
 
-<div class="col d-flex">
-  <div class="card">
-    <img src="images/comidas/img5.webp" alt="tortillas" class="card-img-top img5">
-     <div class="card-body">
-      <h5 class="card-title"> pasticho</h5>
-      <p class="card-text"><strong>Precio: </strong>$4,00</p>
-    </div>
- </div>
-</div>
-
-<div class="col d-flex">
-  <div class="card">
-    <img src="images/comidas/img6.jpg" alt="tortillas" class="card-img-top">
-     <div class="card-body">
-      <h5 class="card-title"> pasticho</h5>
-      <p class="card-text"><strong>Precio: </strong>$4,00</p>
-    </div>
- </div>
-</div>
-
+<?php } ?>
 </div>
 
 </section>
@@ -243,17 +242,17 @@ $lista_colaboradores = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="mb-3">
 <label for="name">Nombre</label></br>
-<input type="text" class="form-control" name="nombre" placeholder="Escribe tu nombre"...Required><br/>
+<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Escribe tu nombre"...Required><br/>
 </div>
 
 <div class="mb-3">
 <label for="email">Correo Electronico</label><br/>
-<input type="email" class="form-control" name="correo" placeholder="Escribe tu correo electronico"...Required><br/>
+<input type="email" class="form-control" name="correo" id="correo" placeholder="Escribe tu correo electronico"...Required><br/>
 </div>
 
 <div class="mb-3">
-<label for="message">Mensaje</label><br/>
-<textarea id="message" class="form-control" name="mensaje" rows="6" cols="50"></textarea><br/>
+<label for="messaje">Mensaje</label><br/>
+<textarea id="messaje" class="form-control" name="mensaje" rows="6" cols="50"></textarea><br/>
 </div>
 
 <input class="btn btn-primary" type="submit" value="Enviar Mensaje">

@@ -65,7 +65,7 @@ $sentencia->bindParam(":id", $txtID);
 
 
 $sentencia->execute();
-
+header("Location:index.php");
 
 }
 

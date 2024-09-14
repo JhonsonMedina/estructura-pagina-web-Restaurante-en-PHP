@@ -1,5 +1,14 @@
 <?php
- $url_base="http://localhost/restaurante/admin/"
+session_start();
+
+
+
+ $url_base="http://localhost/restaurante/admin/";
+
+if(!isset($_SESSION["usuario"])){
+  header("Location:".$url_base."login.php");
+
+}
 
 ?>
 
@@ -28,17 +37,17 @@
            
         <nav class="navbar navbar-expand navbar-light bg-light">
             <div class="nav navbar-nav">
-                <a class="nav-item nav-link active" href="#" aria-current="page"
+                <a class="nav-item nav-link active"  href="<?php echo $url_base;?>index.php" aria-current="page"
                     >Administrador <span class="visually-hidden">(current)</span></a
                 >
 
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>banners/">Banners</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>Colaboradores/">Colaboradores</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>testimonios/">Testimonios</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>menu/">Menu</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>comentarios/">Comentarios</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>usuarios/">Usuarios</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>cerrar/">Cerrar</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base;?>banners/">Banners</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base;?>Colaboradores/">Colaboradores</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base;?>testimonios/">Testimonios</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base;?>menu/">Menu</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base;?>comentarios/">Comentarios</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base;?>usuarios/">Usuarios</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base;?>cerrar.php">Cerrar</a>
 
             </div>
         </nav>

@@ -1,18 +1,33 @@
 <?php
-
 session_start();
 
 if($_POST){
+include("bd.php");
 
- if(($_POST['usuario']=="Jhonson") && ( $_POST['contraseña']== "9513") ){
-   
-    $_SESSION['usuario']="jhonson";
+$usuario=(isset($_POST["usuario"]))?$_POST["usuario"]:"";
+$password=(isset($_POST["password"]))?$_POST["password"]:"";
 
-   header("location: index.php");
+$sentencia=$conexion->prepare("SELECT *, count(*) as n_usuario
+FROM tbl_usuarios
+WHERE usuario=:usuario 
+AND password=:password
+");
+$sentencia->bindParam(":usuario", $usuario);
+$sentencia->bindParam(":password", $password);
+$sentencia->execute();
+$lista_usuarios= $sentencia->fetch(PDO::FETCH_LAZY);
+$n_usuario=$lista_usuarios["n_usuario"];
 
-} else{
-    echo "<script> alert('Usuario o contraseña incorrecta');</script>";
+if($n_usuario==1){
+    $_SESSION["usuario"]=$lista_usuarios["usuario"];
+    $_SESSION["logueado"]=true;
+
+    header("Location:index.php");
+
+} else {
+    echo "Usuario o contraseña Incorrecta..";
 }
+
 
 
 }
@@ -60,14 +75,14 @@ if($_POST){
     <div class="card-header">Inicio</div>
     <div class="card-body">
 
-    <form action="index.php" method="post">
+    <form action="login.php" method="post">
 
-     <label for="" class="form-label"> Usuario:</label>  
-      <input class = "form-control" type="text" name="usuario" id="">    
+     <label for="usuario" class="form-label"> Usuario:</label>  
+      <input class = "form-control" type="text" name="usuario" id="usuario">    
     </br>    
 
-    <label for="" class="form-label">  Constraseña:</label> 
-      <input class = "form-control" type="password" name="contraseña" id=""> 
+    <label for="password" class="form-label">  Constraseña:</label> 
+      <input class = "form-control" type="password" name="password" id="password"> 
      </br>
 
     <button class="btn btn-primary " type="submit">Entrar</button>
