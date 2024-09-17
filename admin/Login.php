@@ -7,6 +7,8 @@ include("bd.php");
 $usuario=(isset($_POST["usuario"]))?$_POST["usuario"]:"";
 $password=(isset($_POST["password"]))?$_POST["password"]:"";
 
+$password=md5($password);
+
 $sentencia=$conexion->prepare("SELECT *, count(*) as n_usuario
 FROM tbl_usuarios
 WHERE usuario=:usuario 
@@ -25,7 +27,7 @@ if($n_usuario==1){
     header("Location:index.php");
 
 } else {
-    echo "Usuario o contraseña Incorrecta..";
+   $mensaje= "Usuario o contraseña Incorrecta..";
 }
 
 
@@ -70,6 +72,21 @@ if($n_usuario==1){
 
 
 </br>
+
+
+<?php if(isset($mensaje))  {   ?>
+<div
+    class="alert alert-danger"
+    role="alert"
+>
+    <strong>Error</strong> <?php echo $mensaje; ?>
+</div>
+
+<?php  } ?>
+   
+
+
+
 <div class="card text-center">
 
     <div class="card-header">Inicio</div>
